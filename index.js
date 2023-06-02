@@ -4,7 +4,6 @@ import inquirer from 'inquirer';
 import fs from 'fs';
 import child from 'child_process';
 import chalk from 'chalk';
-import chalksay from 'chalksay';
 import ora from 'ora';
 import os from 'os';
 const readme = "Inhaltsverzeichnis";
@@ -12,7 +11,7 @@ const spinner = ora();
 const bs = os.platform();
 console.clear();
 
-console.log(chalksay.blue('Aktuelles Betriebssystem:', bs));
+console.log(chalk.blue('Aktuelles Betriebssystem:', bs));
 
 
 inquirer
@@ -41,14 +40,14 @@ inquirer
       child.exec('git init', () => {
         spinner.succeed(chalk.greenBright('Git Repository erstellt.'));
         fs.appendFileSync('README.md', readme);
-        console.log(chalksay.cyan('... Readme erstellt/ergänzt'));
+        console.log(chalk.cyan('... Readme erstellt/ergänzt'));
       });
     } else if (choice.gitandnpm === 'Neues Git Repository mit Readme und NPM init') {
       spinner.start('Initialisiere Git Repository...');
       child.exec('git init', () => {
       spinner.succeed(chalk.greenBright('Git Repository erstellt.'));
       fs.appendFileSync('README.md', readme);
-      console.log(chalksay.cyan('... Readme erstellt/ergänzt'));
+      console.log(chalk.cyan('... Readme erstellt/ergänzt'));
       spinner.start('Initialisiere NPM...');
       child.exec('npm init -y', () => {
       spinner.succeed('NPM initialisiert.');
