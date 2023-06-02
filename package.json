@@ -1,0 +1,20 @@
+{
+  "name": "02-cli",
+  "version": "1.0.1",
+  "description": "eigene cli",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "Matze",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "chalk-animation": "^2.0.3",
+    "chalksay": "^1.1.0",
+    "inquirer": "^9.2.6"
+  },
+  "keywords": [],
+  "devDependencies": {}
+}
