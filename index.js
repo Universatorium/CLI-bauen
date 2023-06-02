@@ -4,9 +4,12 @@ import inquirer from 'inquirer';
 import fs from 'fs';
 import child from 'child_process';
 import chalk from 'chalk';
-import chalkAnimation from 'chalk-animation';
 import chalksay from 'chalksay';
+import ora from 'ora';
+import os from 'os';
 const readme = "Inhaltsverzeichnis";
+const spinner = ora();
+const bs = os.platform();
 console.clear();
 
 inquirer
@@ -24,31 +27,31 @@ inquirer
     }
   ])
   .then((choice) => {
-    // console.log(choice.gitandnpm);
-
+    console.log(chalksay.blue('Aktuelles Betriebssystem:', bs));
     if (choice.gitandnpm === 'Neues Git Repository') {
-      child.exec('git init');
-      console.log('\n Git Repository erstellt.');
+      spinner.start('Initialisiere Git Repository...');
+      child.exec('git init', () => {
+        spinner.succeed(chalk.greenBright('Git Repository erstellt.'));
+      });
     } else if (choice.gitandnpm === 'Neues Git Repository mit Readme') {
-      try {
-        child.exec('git init');
-        fs.writeFileSync('README.md', readme);
-        console.log('Readme erstellt');
-      } catch (e) {
-        console.log(e); // will log an error because file already exists
-      }
-    } else if (choice.gitandnpm === 'Neues Git Repository mit Readme und NPM init') {
-      try {
-        child.exec('git init');
+      spinner.start('Initialisiere Git Repository...');
+      child.exec('git init', () => {
+        spinner.succeed(chalk.greenBright('Git Repository erstellt.'));
         fs.appendFileSync('README.md', readme);
-        console.log('Readme erstellt');
-        child.exec('npm init -v -y');
-        console.log(chalksay.magenta('npm initialisiert'));
-      } catch (e) {
-        console.log(e); // will log an error because file already exists
-      }
+        console.log(chalksay.cyan('... Readme erstellt/ergänzt'));
+      });
+    } else if (choice.gitandnpm === 'Neues Git Repository mit Readme und NPM init') {
+      spinner.start('Initialisiere Git Repository...');
+      child.exec('git init', () => {
+      spinner.succeed(chalk.greenBright('Git Repository erstellt.'));
+      fs.appendFileSync('README.md', readme);
+      console.log(chalksay.cyan('... Readme erstellt/ergänzt'));
+      spinner.start('Initialisiere NPM...');
+      child.exec('npm init -y', () => {
+      spinner.succeed('NPM initialisiert.');
+      });
+    });
     }
-    // else(return);
   })
   .catch((error) => {
     if (error.isTtyError) {
