@@ -12,6 +12,9 @@ const spinner = ora();
 const bs = os.platform();
 console.clear();
 
+console.log(chalksay.blue('Aktuelles Betriebssystem:', bs));
+
+
 inquirer
   .prompt([
     {
@@ -27,7 +30,7 @@ inquirer
     }
   ])
   .then((choice) => {
-    console.log(chalksay.blue('Aktuelles Betriebssystem:', bs));
+    
     if (choice.gitandnpm === 'Neues Git Repository') {
       spinner.start('Initialisiere Git Repository...');
       child.exec('git init', () => {
