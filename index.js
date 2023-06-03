@@ -12,7 +12,7 @@ const bs = os.platform();
 console.clear();
 
 console.log(chalk.blue('Aktuelles Betriebssystem:', bs));
-
+console.log('\n');
 
 inquirer
   .prompt([
@@ -32,8 +32,10 @@ inquirer
     
     if (choice.gitandnpm === 'Neues Git Repository') {
       spinner.start('Initialisiere Git Repository...');
+      console.log('\n');
       child.exec('git init', () => {
         spinner.succeed(chalk.greenBright('Git Repository erstellt.'));
+        console.log('\n');
       });
     } else if (choice.gitandnpm === 'Neues Git Repository mit Readme') {
       spinner.start('Initialisiere Git Repository...');
