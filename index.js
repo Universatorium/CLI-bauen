@@ -24,7 +24,8 @@ inquirer
       choices: [
         'Neues Git Repository',
         'Neues Git Repository mit Readme',
-        'Neues Git Repository mit Readme und NPM init'
+        'Neues Git Repository mit Readme und NPM init',
+        'Abbrechen'
       ]
     }
   ])
